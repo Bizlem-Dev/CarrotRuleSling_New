@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Carrot Rule</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/css/material-bootstrap-wizard-custom.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/css/datepicker.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/css/bootstrap-select.min.css">
+
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/css/custom.css">
+
+	<link rel="icon" href="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/images/icon-img.png" type="image/x-icon"/>
+
+</head>
+<body> 
+	<div class="container">
+        <div class="row">
+	        <div class="col-sm-12">
+	            <div class="wizard-container">
+	                <div class="card wizard-card" data-color="red" id="wizard">
+	                    <form action="" method="" class="">
+	                    	<div class="wizard-header">
+	                    		<div class="row">
+	                    			<div class="col-sm-12 logo-text">
+	                    				<h2>Advanced</h2>
+	                    			</div>
+	                    		</div>
+	                    	</div>
+	                    	<div class="tab-content">
+		                    	<div class="row">
+	                    			<div class="col-sm-10 col-sm-offset-1">
+                                		<div class="row">
+                                			<div class="col-sm-10 adv-rolename">
+                                				<div class="row">
+		                                			<div class="col-sm-12 adv-rolename-a">
+											    		<a href="">Rule 1</a>
+		                                			</div>
+                                				</div>
+                                			</div>
+                                			<div class="col-sm-2 text-right">
+                                				<h4 class="m-0">Project Name</h4>
+                                			</div>
+                                		</div>	
+
+                                		<div class="form-group addMore m-0">
+	                                		<div class="row addMore-main">
+	                                			<div class="col-sm-12 addMore-sub">
+	                                				<div class="row">
+	                                					<div class="col-sm-2">
+												    		<label>Add Controller</label>
+			                                			</div>
+			                                			<div class="col-sm-3">
+			                                				<input type="text" name="" placeholder="Controller" class="form-control">
+			                                			</div>
+			                                			<div class="col-sm-2 p-0">
+			                                				<a class="btn btn-success add-more-btn sm-btn-custom"><i class="fa fa-plus"></i></a>
+			                                			</div>	
+	                                				</div>
+	                                			</div>
+	                                		</div>
+	                                		<div class="row addMore-copy" style="display: none;">
+	                                			<div class="col-sm-12 addMore-sub">
+	                                				<div class="row">
+			                                			<div class="col-sm-3 col-sm-offset-2">
+			                                				<input type="text" name="" placeholder="Controller" class="form-control">
+			                                			</div>
+			                                			<div class="col-sm-2 p-0">
+			                                				<a class="btn btn-danger copy-remove-btn sm-btn-custom"><i class="fa fa-trash"></i></a>
+			                                			</div>
+	                                				</div>
+	                                			</div>
+	                                		</div>
+										</div> 
+
+										<div class="form-group addMore m-0">
+	                                		<div class="row addMore-main">
+	                                			<div class="col-sm-12 addMore-sub">
+	                                				<div class="row">
+	                                					<div class="col-sm-2">
+												    		<label>Rule Engine</label>
+			                                			</div>
+			                                			<div class="col-sm-3">
+			                                				<input type="text" name="" placeholder="Rule Engine" class="form-control">
+			                                			</div>
+			                                			<div class="col-sm-2 p-0">
+			                                				<a class="btn btn-success add-more-btn sm-btn-custom"><i class="fa fa-plus"></i></a>
+			                                			</div>	
+	                                				</div>
+	                                			</div>
+	                                		</div>
+	                                		<div class="row addMore-copy" style="display: none;">
+	                                			<div class="col-sm-12 addMore-sub">
+	                                				<div class="row">
+			                                			<div class="col-sm-3 col-sm-offset-2">
+			                                				<input type="text" name="" placeholder="Rule Engine" class="form-control">
+			                                			</div>
+			                                			<div class="col-sm-2 p-0">
+			                                				<a class="btn btn-danger copy-remove-btn sm-btn-custom"><i class="fa fa-trash"></i></a>
+			                                			</div>
+	                                				</div>
+	                                			</div>
+	                                		</div>
+										</div>
+										<br><br>
+										<div class="row">
+			                            	<div class="col-sm-12 text-center">
+			                            		<button class='btn btn-fill btn-warning btn-wd'>edit</button>
+			                            		<a class='btn btn-fill btn-success btn-wd save-adv'>Save</a>
+			                            		<button class='btn btn-fill btn-danger btn-wd'>Save & next</button>
+			                            	</div>
+			                            </div>	 	
+	                    			</div>
+	                    		</div>	
+                    		</div>	
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>                    	
+
+
+	<script src="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+	<script src="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/js/jquery.bootstrap.js" type="text/javascript"></script>
+	<script src="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/js/material-bootstrap-wizard.js"></script>
+	<script src="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/js/jquery.validate.min.js"></script>
+	<script src="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/js/jquery-ui-1.12.1.js"></script>
+	<script src="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/js/bootstrap-datepicker.js"></script>
+	<script src="<%=request.getContextPath()%>/apps/CarrotRuleSlingEsp/js/bootstrap-select.min.js"></script>
+	
+	
+	
+	<script type="text/javascript" >
+	function setup()
+           {
+	window.open("http://35.236.154.164:8082/portal/apps/static/advanced.esp");
+	} 
+	</script>
+	
+	
+	
+
+	<script type="text/javascript">
+		$('.save-adv').click(function(){
+			var rule = ' &nbsp; <a href="">Rule 1</a>';
+
+    		$('.adv-rolename-a').append(rule);		
+		});
+		$('body').on('click', '.add-more-btn', function() { 
+			var copy = $(this).parents('.addMore').find('.addMore-copy').html();
+			$(this).parents('.addMore').find('.addMore-main').append(copy);
+		});
+
+		$('body').on('click', '.copy-remove-btn', function() { 
+			$(this).parents('.addMore-sub').remove();
+		});
+	</script>
+</body>
+</html>
