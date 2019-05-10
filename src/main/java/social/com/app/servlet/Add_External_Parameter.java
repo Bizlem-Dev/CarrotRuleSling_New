@@ -382,10 +382,10 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 					try {
 						extNode = project_name.getNode(CrRuleConstValue.StringConstant.EXTERNAL_DATA.value());
 						if (extNode.hasNode("File")) {
-							checkFordbCollection(username);
-							retrieveDatafromExcel(extNode, username, out);
-							// out.println("data saved successfully");
-							createIndex(username);
+							checkFordbCollection(username.replaceAll("\\.", "_")   );
+							retrieveDatafromExcel(extNode, username.replaceAll("\\.", "_")  , out);
+//							 out.println("data saved successfully");
+							createIndex(username.replaceAll("\\.", "_")  ,out);
 							// out.println("Index successfully");
 						}
 
@@ -581,21 +581,24 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 		NodeIterator externalnodeitr = null;
 		Node excelname = null;
 		InputStream externalexcelread = null;
-		String o = null;
+//		out.println("username= "+username);
+		String o = "";
 		// String ruleUrl = null;
 		// String response = null;
 		// Stopwatch timer1 = null;
 		JSONObject primarykeydata = null;
 		// int count = 0;
+		
 		try {
 			externalnodeitr = extNode.getNode("File").getNodes();
+
 			while (externalnodeitr.hasNext()) {
 				excelname = externalnodeitr.nextNode();
 				// out.println("ExcelFile name "+excelname);
 
 				externalexcelread = new FileInputStream(CrRuleConstValue.StringConstant.DEFAULT_CARROT_PATH.value()
 						+ "Externaldata/" + excelname.getName());
-
+			
 				HSSFWorkbook externalwb = new HSSFWorkbook(externalexcelread);
 				HSSFSheet externalsheet = externalwb.getSheetAt(0);
 				DataFormatter externalobjDefaultFormat = new DataFormatter();
@@ -611,7 +614,7 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 				Row firstRow = null;
 				Iterator firstRowIt = null;
 				Iterator externalcells = null;
-
+				
 				while (externalrows.hasNext()) {
 					// timer1 = new Stopwatch();
 					externalrow = (HSSFRow) externalrows.next();
@@ -629,12 +632,14 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 					String rowdata = "";
 					primarykeydata = new JSONObject();
 					while (externalcells.hasNext()) {
+						try {
 						externalcell = (HSSFCell) externalcells.next();
 						externalcellFirst = (HSSFCell) firstRowIt.next();
-
+					
 						if (externalcell.getColumnIndex() == 0) {
 							externalobjFormulaEvaluator.evaluate(externalcell);
 							val = externalobjDefaultFormat.formatCellValue(externalcell, externalobjFormulaEvaluator);
+							
 						}
 						// System.out.println(" At Row Column Level:: Passed agentId to the Excel File "
 						// + new Date()+" and the elapsed time is "+timer1.elapsedTime());
@@ -644,13 +649,14 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 						 */
 
 						if (externalcell.getColumnIndex() < firstRow.getLastCellNum()) {
+							try {
 							if (externalcell.getCellType() == Cell.CELL_TYPE_FORMULA) {
 								Object formulaValue = null;
 								switch (externalcell.getCachedFormulaResultType()) {
 								case Cell.CELL_TYPE_NUMERIC:
 									formulaValue = externalcell.getNumericCellValue();
 									o = formulaValue.toString();
-
+									
 									break;
 								case Cell.CELL_TYPE_STRING:
 									formulaValue = externalcell.getRichStringCellValue();
@@ -663,26 +669,38 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 									break;
 
 								}
+							
 							} else {
 								externalobjFormulaEvaluator.evaluate(externalcell);
 								o = externalobjDefaultFormat.formatCellValue(externalcell, externalobjFormulaEvaluator);
 
 							}
+//							out.println("in mongo val oooo = "+o);
 							externalobjFormulaEvaluator.evaluate(externalcellFirst);
 							rowdata = externalobjDefaultFormat.formatCellValue(externalcellFirst,
 									externalobjFormulaEvaluator);
+						
 							String str = rowdata;
-							primarykeydata.put(str.replaceAll("[\\s.╔,û#á]", "").toLowerCase(),
-									o.replaceAll("[╔,û#á]", ""));
-
+//							out.println("in mongo val str = "+str);
+							primarykeydata.put(str, o);
+//							out.println("in mongo primarykeydataprimarykeydataprimarykeydata = "+primarykeydata);
+//							primarykeydata.put(str.replaceAll("[\\s.╔,û#á]", "").toLowerCase(),
+//									o.replaceAll("[╔,û#á]", ""));
+						}catch (Exception e) {
+							// TODO: handle exception
+						}
 						}
 
 						else {
 							break;
 						}
+						}catch (Exception e) {
+							// TODO: handle exception
+						}
 					}
 					// Make database call here
-					makedbConnection(primarykeydata, username);
+//					out.println("in mongo"+primarykeydata);
+					makedbConnection(primarykeydata, username,out);
 					// count++;
 				}
 			}
@@ -719,7 +737,7 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 
 	}
 // db = mongoClient.getDB("carrotruledb");
-	private void createIndex(String username) {
+	private void createIndex(String username, PrintWriter out) {
 		Mongo mongoClient = null;
 		DB db = null;
 		DBCollection linked = null;
@@ -729,6 +747,7 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 			db = mongoClient.getDB("carrotruleSlingdb");
 			linked = db.getCollection(username);
 			linked.createIndex(new BasicDBObject("agent_id__c", 1));
+//			out.println("linked index");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -736,7 +755,7 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 		}
 	}
 
-	private void makedbConnection(JSONObject json, String username) {
+	private void makedbConnection(JSONObject json, String username,PrintWriter out) {
 		Mongo mongoClient = null;
 		DB db = null;
 		DBObject dbObject = null;
@@ -750,10 +769,11 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 			}
 			linked = db.getCollection(username);
 			// linked.createIndex("agent_id__c");
+//			out.println("json 770= "+json.toString());
 			dbObject = (DBObject) (JSON.parse(json.toString()));
-
+			
 			linked.insert(dbObject);
-
+//			out.println("json 770=inserted ");
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ":" + e.getMessage());
 

@@ -65,7 +65,7 @@ import com.service.FreeTrial12;
 				"productEdit" }) })
 @SuppressWarnings("serial")
 
-// http://35.236.154.164:8082/portal/servlet/service/testserv
+// http://35.236.154.164:8082/portal/servlet/service/RuleengineList.ruleenginelist
 public class RuleListServ extends SlingAllMethodsServlet {
 
 	@Reference

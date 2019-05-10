@@ -357,8 +357,8 @@ public class ExcelAxternal extends SlingAllMethodsServlet {
 						Node content_node = session.getRootNode().getNode("content").getNode("CARROT_RULE");
 						InputStream myInputStream = new ByteArrayInputStream(bytes);
 
-						String url = "http://35.221.253.98:8082/portal/content/CARROT_RULE/vik_bizlem.com/Bizlem_project/EXTERNAL_DATA/File/"
-								+ name;
+//						String url = "http://35.221.253.98:8082/portal/content/CARROT_RULE/vik_bizlem.com/Bizlem_project/EXTERNAL_DATA/File/"
+//								+ name;
 						if (!sf_object.hasNode("File")) {
 							fileName = sf_object.addNode("File");
 

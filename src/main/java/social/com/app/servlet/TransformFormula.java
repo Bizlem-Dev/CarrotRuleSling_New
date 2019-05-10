@@ -17,7 +17,9 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -138,6 +140,13 @@ public class TransformFormula extends SlingAllMethodsServlet {
 		FileOutputStream streamout = null;
 		Node carrotmainNode=null;
 		String level="";
+		String keysv=null;
+		long lastcolumn=0;
+		ArrayList<String> keys = new ArrayList<String>();
+		ArrayList<String> values = new ArrayList<String>();
+		ArrayList<String> keysarray = new ArrayList<String>();
+		ArrayList<String> valuesarray = new ArrayList<String>();
+		String valued = null;
 		try {
 
 			session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
@@ -183,11 +192,18 @@ public class TransformFormula extends SlingAllMethodsServlet {
 						if (!transformgenericnode.hasNode("Level1")) {
 
 							transformdownloadnode = transformgenericnode.addNode("Level1");
+							lastcolumn=transformdownloadnode.getProperty("lastcolnumberLevel1").getLong();
+							out.println("transformdownloadnode= "+transformdownloadnode);
 						} else {
-
+							
 							transformdownloadnode = transformgenericnode.getNode("Level1");
+							out.println("transformdownloadnode= "+transformdownloadnode);
+//							Node lvlnode=transformgenericnode.getNode("Level1");//("Level1")
+							lastcolumn=transformdownloadnode.getProperty("lastcolnumberLevel1").getLong();
+							
 							transformdownloadnode.remove();
 							transformdownloadnode = transformgenericnode.addNode("Level1");
+//							lastcolumn
 
 						}}
 						if(jsonObject.getString("level").equals("level2")){
@@ -195,9 +211,15 @@ public class TransformFormula extends SlingAllMethodsServlet {
 						if (!transformgenericnode.hasNode("Level2")) {
 
 							transformdownloadnode = transformgenericnode.addNode("Level2");
+							out.println("transformdownloadnode= "+transformdownloadnode);
+							lastcolumn=transformdownloadnode.getProperty("lastcolnumberLevel1").getLong();
+							lastcolumn=transformdownloadnode.getProperty("lastcolnumberLevel1").getLong();
+							out.println("transformdownloadnode= "+transformdownloadnode);
 						} else {
 
 							transformdownloadnode = transformgenericnode.getNode("Level2");
+							out.println("transformdownloadnode= "+transformdownloadnode);
+							lastcolumn=transformdownloadnode.getProperty("lastcolnumberLevel2").getLong();
 							transformdownloadnode.remove();
 							transformdownloadnode = transformgenericnode.addNode("Level2");
 
@@ -267,6 +289,10 @@ public class TransformFormula extends SlingAllMethodsServlet {
 					HSSFRow row;
 					HSSFCell cell;
 					Iterator<Row> rows = sheetread.rowIterator();
+					DataFormatter objDefaultFormat = new DataFormatter();
+
+					FormulaEvaluator objFormulaEvaluator = new HSSFFormulaEvaluator((HSSFWorkbook) wb);
+
 					while (rows.hasNext()) {
 						row = (HSSFRow) rows.next();
 						 out.println("Row Next");
@@ -275,17 +301,117 @@ public class TransformFormula extends SlingAllMethodsServlet {
 						while (cells.hasNext()) {
 							cell = (HSSFCell) cells.next();
 							 out.println("Cell Next");
-							 
-							if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
+//							 if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+//
+////									formulavalues.add(cell.getCellFormula());
+//									 out.println("Cell Next");
+//								}
+							 out.println("Cell cell.getColumnIndex()  = "+cell.getColumnIndex() );
+								if (cell.getColumnIndex() > lastcolumn) {
+									out.print("lastcolumn = "+lastcolumn);
+//									out.print("cell.getColumnIndex() = "+cell.getColumnIndex());
+									if (row.getRowNum() == 0) {
+										objFormulaEvaluator.evaluate(cell); // This will evaluate the cell,
+										// And any
+										// type of
+										keysv = objDefaultFormat.formatCellValue(cell, objFormulaEvaluator);
+										keysarray.add(keysv);
+										out.println("keysv row=0= "+keysv);
+										out.println("keysarray = "+keysarray);
+										
+									}
+									if (row.getRowNum() == 1) {
+										
+										if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
+											//
+//																			formulavalues.add(cell.getCellFormula());
+																			valued = cell.getCellFormula();
+																			valuesarray.add(valued);
+																			out.println("keysv row1= "+valued);
+																			out.println("keysarray = "+valuesarray);
+																			 out.println("formulavalues= "+formulavalues);
+																		}else {
+										objFormulaEvaluator.evaluate(cell); // This will evaluate the cell,
+																			// And any
+																			// type of
+										valued = objDefaultFormat.formatCellValue(cell, objFormulaEvaluator);
+										valuesarray.add(valued);
+										out.println("keysv row1= "+valued);
+										out.println("keysarray = "+valuesarray);
+																		}
+										// dataarray.put(keyobject);
+									}
+									if (row.getRowNum() == 2) {
+//										out.print("lastcolumn 2= "+lastcolumn);
+										objFormulaEvaluator.evaluate(cell); // This will evaluate the cell,
+																			// And any
+																			// type of
+																			// cell will return string value
+										valued = objDefaultFormat.formatCellValue(cell);
+										out.println("valued = 2row"+valued);
+										 out.println("Formula : "+valued);
+										valuesarray.add(valued);
 
-								formulavalues.add(cell.getCellFormula());
-								 out.println("Cell Next");
-							}
+									}
+
+									// mainobject.put("Data", dataarray);
+
+								}
+//							if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
+//
+//								formulavalues.add(cell.getCellFormula());
+//								 out.println("Cell Next");
+//							}
 						
 					}
 
 				
+						JSONObject rawjsontrnsform=new JSONObject();
+						JSONArray array=new JSONArray();
+						try {
+							JSONArray trnformarray = new JSONArray();
 
+							JSONObject rawjsontrn = null;
+							for (int k = 0; k < keysarray.size(); k++) {
+								rawjsontrn = new JSONObject();
+
+								rawjsontrnsform.put(keysarray.get(k), valuesarray.get(k));
+
+								rawjsontrn.put(keysarray.get(k), valuesarray.get(k));
+								trnformarray.put(rawjsontrn);
+								out.println("rawjsontrn= 2"+rawjsontrn);
+
+							}
+
+							JSONObject colmedata = new JSONObject();
+
+							array.put(rawjsontrnsform);
+							colmedata.put("Transform", trnformarray);
+//							dataarra.put(colmedata);
+							out.println("trnformarray= 2"+trnformarray);
+							out.println("trnformarray= 2"+trnformarray.length());
+							String forarray[] = new String[trnformarray.length()];
+							for (int j = 0; j < trnformarray.length(); j++) {
+								out.println("trnformarray.getString(j) ="+trnformarray.getString(j));
+								forarray[j] = trnformarray.getString(j);
+							//	out.println(forarray);
+								
+							}
+							out.println("forarr"+Arrays.toString(forarray));
+							out.println("transformdownloadnode ="+transformdownloadnode);
+							transformdownloadnode.setProperty("Formula", forarray);
+							session.save();
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						
+//				for (int i = 0; i < formulavalues.size(); i++) {
+//					out.println(formulavalues.get(i));
+//					forobj = new JSONObject();
+//					forobj.put("Formula", formulavalues.get(i));
+//					formulaarray.put(forobj);
+//
+//				}
 				for (int i = 0; i < formulavalues.size(); i++) {
 					out.println(formulavalues.get(i));
 					forobj = new JSONObject();
@@ -294,14 +420,8 @@ public class TransformFormula extends SlingAllMethodsServlet {
 
 				}
 				//out.println("Jsonarray : : : :" + formulaarray);
-				String forarray[] = new String[formulaarray.length()];
-				for (int j = 0; j < formulaarray.length(); j++) {
-
-					forarray[j] = formulaarray.getString(j);
-				//	out.println(forarray);
-
-				}
-				transformdownloadnode.setProperty("Formula", forarray);
+				
+//				transformdownloadnode.setProperty("Formula", forarray);
 
 
 				/*String agentdata = Getagentdata(session, username, projectname);

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.InvalidItemStateException;
@@ -25,7 +26,8 @@ import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.commons.json.JSONObject;
 
 public class FreeTrial12 {
-
+	ResourceBundle bundle = ResourceBundle.getBundle("config");
+	static ResourceBundle bundleststic = ResourceBundle.getBundle("config");
 	public Node getCarrotruleNode(String freetrialstatus, String email, Session session1 ,SlingHttpServletResponse response ) throws IOException, AccessDeniedException, ItemExistsException, ReferentialIntegrityException, ConstraintViolationException, InvalidItemStateException, VersionException, LockException, NoSuchNodeTypeException, RepositoryException {
 
 
@@ -144,7 +146,7 @@ public class FreeTrial12 {
 		}
 		public String checkfreetrial(String userid) {
 		int expireFlag=0;//35.236.154.164 // 35.221.160.146
-		String addr = "http://35.236.154.164:8086/apirest/trialmgmt/trialuser/"+userid+"/CarrotRuleFreeTrial";
+		String addr = "http://"+bundleststic.getString("SlingIP")+":8086/apirest/trialmgmt/trialuser/"+userid+"/CarrotRuleFreeTrial";
 		String username = "username";
 		String password = "password";
 		try{

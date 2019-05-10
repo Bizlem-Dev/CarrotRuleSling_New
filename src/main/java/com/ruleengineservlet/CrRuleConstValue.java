@@ -187,8 +187,8 @@ public class CrRuleConstValue {
  	increment("increment"),
  	flat_rate("flat_rate"),
  	UNKNOWN("unknown"),
- 	DRL_URL("http://35.186.166.22:8082/drools/callrules/"),
- 	PORTAL_URL("http://35.186.166.22:8082/portal/"),
+ 	DRL_URL("http://34.74.125.253:8082/drools/callrules/"),
+ 	PORTAL_URL("http://35.200.169.114:8082/portal/"),
  	RULE_ENGINE_URL("http://35.186.166.22:8082/portal/servlet/service/")
  	;
 	 // /home/vil/sling tomcat/apache-tomcat-6.0.35/webapps

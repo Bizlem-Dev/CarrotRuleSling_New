@@ -136,6 +136,7 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 		JSONArray formulaarray = new JSONArray();
 		JSONObject fileobject = new JSONObject();
 		JSONArray levelarray = new JSONArray();
+		Value[] datavalues = null;
 		try {
 
 			session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
@@ -177,13 +178,18 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 					JSONArray level1array = new JSONArray();
 					JSONArray responsearray = jsonObject.getJSONArray("Level");
 					// System.out.println(responsearray);
-
+					String lvl="";
 					JSONObject currentenginejson = null;
 					for (int i = 0; i < responsearray.length(); i++) {
 						JSONObject levelboject = responsearray.getJSONObject(i);
 						// System.out.println("Values : "+vl);
 						if (levelboject.has("Level1")) {
+							
+							
 							JSONArray responsearray1 = levelboject.getJSONArray("Level1");
+							if(responsearray1.length()>0) {
+								lvl="Level1";
+//								out.println("lvl= "+lvl+responsearray1.length());
 							for (int j = 0; j < responsearray1.length(); j++) {
 								currentenginejson = new JSONObject();
 								String level1values = (String) responsearray1.get(j);
@@ -192,10 +198,15 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 								level1array.put(currentenginejson);
 								}
 
-							}
+							}}
 						}
 						if (levelboject.has("Level2")) {
+							
+//							out.println("lvl= "++responsearray1.length());
 							JSONArray responsearray1 = levelboject.getJSONArray("Level2");
+							if(responsearray1.length()>0) {
+								lvl="Level2";
+//								out.println("lvl= "+lvl+responsearray1.length());
 							for (int j = 0; j < responsearray1.length(); j++) {
 								currentenginejson = new JSONObject();
 								String level1values = (String) responsearray1.get(j);
@@ -204,29 +215,42 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 								level1array.put(currentenginejson);
 								}
 							}
-						}
-						if (levelboject.has("Level3")) {
-							JSONArray responsearray1 = levelboject.getJSONArray("Level3");
-							for (int j = 0; j < responsearray1.length(); j++) {
-								currentenginejson = new JSONObject();
-								String level1values = (String) responsearray1.get(j);
-								if(level1values!="") {
-								currentenginejson.put("RuleEngine", level1values);
-								level1array.put(currentenginejson);
-								}
 							}
 						}
+//						if (levelboject.has("Level3")) {
+//							JSONArray responsearray1 = levelboject.getJSONArray("Level3");
+//							for (int j = 0; j < responsearray1.length(); j++) {
+//								currentenginejson = new JSONObject();
+//								String level1values = (String) responsearray1.get(j);
+//								if(level1values!="") {
+//								currentenginejson.put("RuleEngine", level1values);
+//								level1array.put(currentenginejson);
+//								}
+//							}
+//						}
 
 					}
 					System.out.println(level1array);
 					String forarray[] = new String[level1array.length()];
 					for (int j = 0; j < level1array.length(); j++) {
-
+						if(level1array.getString(j) !="") {
 						forarray[j] = level1array.getString(j);
 						// out.println(forarray);
+						}
 
 					}
-					ruleenginenode.setProperty("Current_Rule_Engine", forarray);
+					if (lvl =="Level1" )  {
+						if(ruleenginenode.hasProperty("Current_Rule_Engine_Level1")) {
+						ruleenginenode.getProperty("Current_Rule_Engine_Level1").remove();
+						}
+					ruleenginenode.setProperty("Current_Rule_Engine_Level1", forarray);
+					}
+					if (lvl =="Level2" )  {
+						if(ruleenginenode.hasProperty("Current_Rule_Engine_Level2")) {
+							ruleenginenode.getProperty("Current_Rule_Engine_Level2").remove();
+							}
+						ruleenginenode.setProperty("Current_Rule_Engine_Level2", forarray);
+						}
 					session.save();
 
 					if (carrotmainNode != null) {
@@ -236,13 +260,61 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 						// out.println("ValueCheck : "+valuecheck);
 						// System.out.println(valuecheck);
 						JSONArray inputjson = valuecheck.getJSONArray("RawData");
-						for (int i = 0; i < inputjson.length(); i++) {
+						out.print("inputjson= "+inputjson);
+						out.print("length= "+inputjson.length());
+						String transformkeys=null;
+						JSONArray transarr=new JSONArray();
+						try {
+							JSONArray tranarr=new JSONArray();
+							Node transformnode = carrotmainNode.getNode(projectname)
+									.getNode("TRANSFORM_DATA").getNode("Transform");
+						out.println("transfornnnode---------------- " + transformnode);
+							datavalues = transformnode.getProperty("Transform").getValues();
+							out.println("mainobject 446: lengt= " + datavalues.length);
+							for (int i = 0; i < datavalues.length; i++) {
+//								String transformnodevalues = datavalues[i].getString();
+//								JSONObject json = new JSONObject(transformnodevalues);
+//								mainobject.put("Transform", json);
+								
+								String transformnodevalues = datavalues[i].getString();
+								JSONObject json = new JSONObject(transformnodevalues);
+								tranarr.put(json);
+							out.println("json 456: " + json);
+//							out.println("transform 456: " + mainobject);
 
+							}
+						
+							out.println("tranarr tranarr: " + tranarr);
+							for(int j=0;j<tranarr.length();j++) {
+								out.println("jj = "+j);
+								JSONObject transjs=tranarr.getJSONObject(j);
+								out.println("transjs= "+transjs);
+								JSONArray jsar =transjs.names();
+								out.println("jsar= "+jsar);
+//								String transfokeys=jsar.getString(0);
+//								out.println("transfokeys= "+transfokeys);
+//								transarr.put(transfokeys);
+								for (int k = 0; k < jsar.length(); ++k) {
+									out.println("transjs= "+k);
+								String	transfokeys= jsar.getString(k); // Here's your key
+								out.println("key1= " + transfokeys);
+									transarr.put(transfokeys);
+								
+									}
+								}
+							out.println("transarr= ===="+transarr);
+							
+						} catch (Exception e) {
+							out.println("exc=in trans= " + e.getMessage());
+						}
+						int columnindex = count;
+						for (int i = 0; i < inputjson.length(); i++) {
+							
 							// JSONObject rawjson = inputjson.getJSONObject(i);
 
 							// Iterator jsonitr = rawjson.keys();
-							// out.println("count : " + count);
-							int columnindex = count;
+							 out.println("count : " + count);
+							
 							rowhead0.createCell(count).setCellValue("Input");
 
 							// while (jsonitr.hasNext()) {
@@ -252,16 +324,30 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 							 * if(uniquecode.contains(keys) || keys.length()<=1){ continue; } else{
 							 */
 							// uniquecode.add(keys);
-							// out.println("Keys : "+keys);
+//							 out.println("Keys : "+keys);
 							rowhead1.createCell(count++).setCellValue((String) keys);
-							// out.println("Count : : : "+count);
+							
+							
+//							 out.println("Count : : : "+count);
 							// }
 							// }
-							sheet.addMergedRegion(new CellRangeAddress(0, 0, columnindex, count));
-
+							sheet.addMergedRegion(new CellRangeAddress(0, 0, columnindex, count-1));
+							if(rowhead1.getRowNum()==1) {
+								int noOfColumns = rowhead1.getPhysicalNumberOfCells();
+//								out.println("number of col in input= "+noOfColumns);
+								}
 						}
-						ruleenginecount = ruleenginecount + 1 + count;
-						ruleoutputcount = ruleoutputcount + 1 + count;
+						if(transarr.length()>0) {
+							for(int i=0;i<transarr.length();i++){
+								
+								rowhead1.createCell(count++).setCellValue((String) transarr.getString(i));
+								
+							}
+							
+							
+						}
+						ruleenginecount = ruleenginecount  + count;
+						ruleoutputcount = ruleoutputcount  + count;
 						// out.println("Count : " + count);
 						// out.println("ruleenginecount out : " + ruleenginecount);
 						if (carrotmainNode.hasNode(projectname)) {
@@ -296,22 +382,37 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 							// ruleengine namecarrotmainNodez
 							// out.println("ruleenginename : " + ruleenginename);
 							Node currentruleengine = carrotmainNode.getNode(projectname).getNode("Rule_Engine");
-							Value[] va = currentruleengine.getProperty("Current_Rule_Engine").getValues();
+							Value[] va=null;
+							if (lvl =="Level1" )  {
+//								ruleenginenode.setProperty("Current_Rule_Engine_Level1", forarray);
+								 va = currentruleengine.getProperty("Current_Rule_Engine_Level1").getValues();
+								}
+								if (lvl =="Level2" )  {
+//									ruleenginenode.setProperty("Current_Rule_Engine_Level2", forarray);
+									va = currentruleengine.getProperty("Current_Rule_Engine_Level2").getValues();
+									}
+							
+//							Value[] va = currentruleengine.getProperty("Current_Rule_Engine").getValues();
 							for (int k = 0; k < va.length; k++) {
 								String s = va[k].getString();
 								String currentruleenginename = new JSONObject(s).getString("RuleEngine");
 								hset.add(currentruleenginename);
 //								out.println("hset= "+hset);
 							}
+//							out.println("hset.size()= "+hset.size());
 							NodeIterator itr = carrotmainNode.getNode(projectname).getNode("Rule_Engine").getNodes();
 							while (itr.hasNext()) {
 								Node itrnode = itr.nextNode();
 								ruleenginename = itrnode.getName();
 								// out.println("CurrentRuleEngine : "+currentruleenginename);
-								// out.println("ruleenginename : " + ruleenginename);
-
-								if (hset.contains(ruleenginename)) {
-//									out.println("hset if = "+hset);
+								 out.println("ruleenginename : " + ruleenginename);
+								 if(!hset.contains(ruleenginename)) {
+									 rowhead0.createCell(ruleenginecount++).setCellValue("rr");
+									 rowhead1.createCell(ruleenginecount).setCellValue("rkj");
+									 out.println("ruleenginename :hset " + ruleenginename);
+								 }
+								  if (hset.contains(ruleenginename)) {
+									out.println("hset if = "+hset);
 //									continue;
 //								} else {
 									rowhead0.createCell(ruleenginecount++).setCellValue(ruleenginename);
@@ -320,10 +421,11 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 									NodeIterator ruleengineitr = carrotmainNode.getNode(projectname)
 											.getNode("Rule_Engine").getNode(ruleenginename).getNodes();
 									if (ruleengineitr.hasNext()) {
-
+										
 										Node rulename = ruleengineitr.nextNode();// first rule node
 										if (rulename.hasProperty("OutputField")) {
 											outputdata = rulename.getProperty("OutputField").getValues();
+//out.println(" outputdata.length= "+ outputdata.length);
 											for (int i = 0; i < outputdata.length; i++) {
 												String rulvalue = outputdata[i].getString();
 												// out.println("Rule Engine Count : "+ruleoutputcount);
@@ -332,6 +434,10 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 														.setCellValue(new JSONObject(rulvalue).getString("field"));
 //											out.println(
 //													"Field : : :" + new JSONObject(rulvalue).getString("field"));
+												if(rowhead1.getRowNum()==1) {
+												int noOfColumns = rowhead1.getPhysicalNumberOfCells();
+//												out.println("number of col= "+noOfColumns);
+												}
 												sheet.addMergedRegion(
 														new CellRangeAddress(0, 0, ruleoutputcount, ruleoutputcount));
 
@@ -344,7 +450,32 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 									}
 								}
 							}
-
+							
+//							sheet.addMergedRegion(new CellRangeAddress(0, 0, ruleoutputcount, ruleoutputcount));
+//							rowhead0.createCell(ruleoutputcount++).setCellValue("Transform Data");
+//							System.out.println("rowhead0- changed for getting cloumn fix using ruleng ");
+							
+				
+							if (lvl =="Level1" )  {
+							if(rowhead1.getRowNum()==1) {
+								int noOfColumns = rowhead1.getPhysicalNumberOfCells();
+//								out.println("number of colin exel= "+noOfColumns);
+//								transformgenericnode.g("Level1")
+								Node lvlnode=transformgenericnode.getNode("Level1");//("Level1")
+								lvlnode.setProperty("lastcolnumberLevel1", noOfColumns);
+								}}
+							if (lvl =="Level2" )  {
+							if(rowhead1.getRowNum()==1) {
+								int noOfColumns = rowhead1.getPhysicalNumberOfCells();
+//								out.println("number of colin exel= "+noOfColumns);
+								Node lvlnode=transformgenericnode.getNode("Level2");//("Level1")
+								lvlnode.setProperty("lastcolnumberLevel2", noOfColumns);
+								}}
+							
+//							if(rr) {
+//								
+//								
+//							}
 						}
 
 						/*
@@ -518,6 +649,7 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 							}
 
 						}
+						
 
 					}
 				}

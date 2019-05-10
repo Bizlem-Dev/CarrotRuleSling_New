@@ -389,7 +389,7 @@ public class Transform_validation extends SlingAllMethodsServlet {
 																						// type of
 													keysv = objDefaultFormat.formatCellValue(cell, objFormulaEvaluator);
 													keysarray.add(keysv);
-//													out.print("keysarray = "+keysarray);
+//													out.println("keysarray = "+keysarray);
 													// dataarray.put(keyobject);
 												}
 												if (row.getRowNum() == 2) {
@@ -399,7 +399,7 @@ public class Transform_validation extends SlingAllMethodsServlet {
 																						// type of
 																						// cell will return string value
 													valued = objDefaultFormat.formatCellValue(cell);
-													// out.println("Formula : "+valued);
+//													 out.println("Formula : "+valued);
 													valuesarray.add(valued);
 
 												}
@@ -666,7 +666,7 @@ public class Transform_validation extends SlingAllMethodsServlet {
 		}
 		return jsonObject12;
 	}
-
+/*  */
 	public JSONObject getJsonAlldata(JSONObject object, Session session, String project, String username,
 			SlingHttpServletResponse response) throws IOException {
 		// PrintWriter out = response.getWriter();

@@ -1,10 +1,11 @@
 var email = "carrotrule444_gmail.com";
 var choices=[]; // ["one", "two","three"];
-var choices2;
+
+var choices1=[];
 var jsrl={};
 var ruloptions=[];
 var consodlink="";
-
+var chjson;
 $(document).ready(function() {
 	getPrjDetailsTable();
 	// getRawTable();
@@ -80,12 +81,13 @@ console.log(JSON.stringify(dataa));
 
 var json = JSON.parse(dataa);
 console.log(json);	
-
+chjson=JSON.parse(dataa);
 choices= json.Rule_Engine;
- choices2=choices;
- console.log("choices2 "+JSON.stringify(choices2));
+
+  choices1=json.Rule_Engine;
+  console.log("choices1 "+JSON.stringify(choices1));
 console.log("rulArr "+JSON.stringify(choices));
-addRuleSelect("ruleone");
+addRuleSelect("ruleone","rullist1");
 
 
 
@@ -219,7 +221,7 @@ $('.transformula1').click(function uploadconsoformula() {
 						formulajs["level"] = "level1";
 						console.log("mainJson- " + JSON.stringify(formulajs));
 						
-					/*	$.ajax({
+						$.ajax({
 							type : 'POST',
 							url : '/portal/servlet/service/TransformFormula.formula',
 							async : false,
@@ -234,7 +236,7 @@ $('.transformula1').click(function uploadconsoformula() {
 						}).fail(function(err) {
 
 						console.log("error" + err);
-						}); */
+						}); 
 					}}else{
 						console.log("- else" );
 					}
@@ -358,7 +360,7 @@ $('.consolform').click(function uploadconsoformula() {
 
 $('body').on('click', '#set-up .add-more-lavel1', function() {
 //	getRulelistselect();
-	addRuleSelect("level2rul1");
+	addRuleSelect("level2rul1","rullistad2");
 	$('#set-up .test-run-step-2').css('display', 'block');
 	$('#set-up .test-run-step-c2').css('display', 'block');
 	$(this).removeClass('add-more-lavel1');
@@ -368,7 +370,7 @@ $('body').on('click', '#set-up .add-more-lavel1', function() {
 $('body').on('click', '#set-up .add-more-lavel2', function() {
 	
 	if(document.getElementById("lastrul") !=""){
-	addRuleSelect("lastrul");
+	addRuleSelect("lastrul","lasrrul");
 	}
 	$('#set-up .test-run-step-3').css('display', 'block');
 	$(this).attr('disabled', 'disabled');
@@ -417,7 +419,7 @@ $('body').on('click', '.add-more-btn', function() {
 			addClassnId1($this, "ruleadd12", "rul", cnt);
 			
 			var Id=document.getElementsByClassName('ruleadd12')[cnt].id;
-			var choices1=choices;
+			
 			if(Id=="rul"+cnt){
 				console.log("cnt = "+cnt);
 				console.log("addrul class =Id "+Id);
@@ -429,12 +431,18 @@ $('body').on('click', '.add-more-btn', function() {
 				console.log("ruleName:cnt "+ruleName);
 				
 				}
-				 var index = choices1.indexOf(ruleName);
-				 
+				
+
+//				  console.log("ruleName:choices org 115"+chjson.Rule_Engine);
+				  var index = choices1.indexOf(ruleName);
 				    if (index > -1) {
 				    	choices1.splice(index, 1);
 				    }
-				    console.log("ruleName:choices "+choices1);
+
+				    console.log("ruleName:choices1 "+choices1);
+				    choices2=chjson.Rule_Engine;
+				    console.log("ruleName:choices1 44444444"+choices2);
+//				    console.log("ruleName:choices org333 "+chjson.Rule_Engine);
 				   var newDiv = document.getElementById(Id);
 				   
 				    var selectHTML = "";
@@ -460,10 +468,12 @@ $('body').on('click', '.add-more-btn', function() {
 		
 		var Id=document.getElementsByClassName('lev2rul12')[lv2cnt].id;
 		
+		 console.log("choices2 56"+JSON.stringify(choices2));
+		
 		if(Id=="rul2plr"+lv2cnt){
 			console.log("addrul class =Id "+Id);
 			if(lv2cnt==1){
-				var ruleName=document.getElementById("rullist1").value;	
+				var ruleName=document.getElementById("rullistad2").value;	
 				console.log("if id ruleName= "+ruleName);
 				}else{
 				var ruleName= $('#rul2plr'+(lv2cnt-1)).find("#rullist2").val();	
@@ -504,33 +514,7 @@ $('body').on('click', '.add-more-btn', function() {
 			addClassnId1($this, "ruleengaddplus", "ruleengplus", advcnt);
 			getrlrngadv();
 			
-//			var Id=document.getElementsByClassName('ruleengadd12')[advcnt+1].id;
-//			console.log("advcnt class =Id "+Id);
-//			console.log("advcnt class =Id ruleeng:: "+Id+advcnt);
-//			var rlg=   document.getElementById("ruleeng").value; 
-//		    console.log("rlg: "+rlg);
-//			if(Id=="ruleeng"+advcnt){
-//				console.log("advcnt class =Id "+Id+advcnt);
-//				 var ruleengnm=$(".rulengcp1").text();//$('#ruleeng'+advcnt).find("#rulengcp").val();	   // 
-//				    console.log("ruleengnm23: "+ruleengnm);
-//				   var newDiv = document.getElementById(Id);
-//				   
-//				 
-//				   
-//				    var selectHTML = "";
-//				    
-//				    selectHTML='<div class="col-sm-12 text-left"><a href="#" class="rule1" id="ruleng12">Rule 2</a></div>';newDiv.innerHTML = selectHTML;
-////				    for(i = 0; i < choices.length; i = i + 1) {
-//				    	
-////				        selectHTML += "<option value='" + choices[i] + "'>" + choices[i] + "</option>";
-////				    }
-//				    
-////				    selectHTML += '</select></div><div class="col-sm-3 p-0"><a class="btn btn-danger copy-remove-btn sm-btn-custom sm-btn-custom2"><i class="fa fa-trash"></i></a></div>';
-////				    var fieldname= $('#op'+i).find("#fieldnamecpy").val();
-//				   
-//				    newDiv.innerHTML = selectHTML;
-//
-//			}
+
 			
 		}
 	else{
@@ -2635,16 +2619,17 @@ function createCell(cell, text) {
 	}
 
 
-function addRuleSelect(divid) {
+function addRuleSelect(divid,rullis) {
     var newDiv = document.getElementById(divid);
     
     var selectHTML = "";
-    console.log("choces "+JSON.stringify(choices));
-//    
-    selectHTML='<select class="form-control  bg-gray" id="rullist1">';
-    for(i = 0; i < choices.length; i = i + 1) {
-    	   console.log("choces i"+choices[i]);
-        selectHTML += "<option value='" + choices[i] + "'>" + choices[i] + "</option>";
+    console.log("choces "+JSON.stringify(chjson.Rule_Engine));
+//      console.log("choces i"+chjson.Rule_Engine);
+    
+    selectHTML="<select class='form-control  bg-gray' id='"+rullis+"'>";
+    for(i = 0; i < chjson.Rule_Engine.length; i = i + 1) {
+    	 
+        selectHTML += "<option value='" + chjson.Rule_Engine[i] + "'>" + chjson.Rule_Engine[i] + "</option>";
     }
 
     selectHTML += '</select>';
@@ -2724,9 +2709,11 @@ return rulselectarr;
 */
 var ipData={};
 var lvlJsonArr= [];
-var lvlJson={};
+var lvlJsonArr1= [];
+
 //code by anagha
 $("body").on("click", ".down-set-up", function() {
+	console.log("id c1 down-set-up: clicked------------");
 var $this = $(this);
 console.log($this);
 var id_dwn= $(this).closest('div').attr('id');
@@ -2737,21 +2724,29 @@ ipData["projectname"]= prjName;
 
 if(id_dwn=="c1"){
 	var lvlArr= getLevelData(id_dwn);
-	console.log("lvlArr: "+lvlArr);
-
+	console.log("id c1 lvlArr: "+lvlArr);
+	var lvlJson={};
 	lvlJson["Level1"]=lvlArr;
 	lvlJson["Level2"]=[];
 	lvlJson["Level3"]=[];
+	lvlJsonArr.push(lvlJson);
+	ipData["Level"]= lvlJsonArr;
+	console.log("console.log(JSON.stringify(lvlJsonArr))== "+JSON.stringify(ipData));
 	}else if(id_dwn=="c2"){
 	var lvlArr1= getLevelData1(id_dwn);
-	console.log("lvlArr: "+lvlArr1);
-
+	console.log("lvlArr id c2: "+lvlArr1);
+	var lvlJson={};
 	lvlJson["Level1"]=[];
 	lvlJson["Level2"]=lvlArr1;
 	lvlJson["Level3"]=[];
+//	console.log("console.log(JSON.stringify(lvlJson))== "+JSON.stringify(lvlJson));
+//	console.log("console.log(JSON.stringify(lvlJsonArr))== "+JSON.stringify(lvlJsonArr1));
+	lvlJsonArr1.push(lvlJson);
+	ipData["Level"]= lvlJsonArr1;
+	console.log("console.log(JSON.stringify(lvlJsonArr))== "+JSON.stringify(ipData));
 	}
-lvlJsonArr.push(lvlJson);
-ipData["Level"]= lvlJsonArr;
+
+
 
 console.log(JSON.stringify(ipData));
 $.ajax({
@@ -2827,7 +2822,7 @@ console.log(lvlCnt);
 var ruleName="";
 if(lvlCnt==1){
 if(Id=="rul2plr"){
-ruleName= $('#rul2plr').find("#rullist1").val();	
+ruleName= $('#rul2plr').find("#rullistad2").val();	
 console.log("rulName: "+ruleName);
 }
 lvlArr1.push(ruleName);

@@ -241,6 +241,16 @@ PrintWriter out = response.getWriter();
 								}
 							}
 						}
+						int noOfColumns = rowhead0.getPhysicalNumberOfCells();
+//						out.println("number of colin exel= "+noOfColumns);
+						
+//						transformgenericnode.g("Level1")
+//						Node lvlnode=transformgenericnode.getNode("Level1");//("Level1")
+						if(consolidatorgenericnode.hasProperty("lastcolnumber")) {
+							consolidatorgenericnode.getProperty("lastcolnumber").remove();
+						
+						}
+						consolidatorgenericnode.setProperty("lastcolnumber", noOfColumns);
 
 					}
 					File file = new File(CrRuleConstValue.StringConstant.Generic_PATH.value() + username);
