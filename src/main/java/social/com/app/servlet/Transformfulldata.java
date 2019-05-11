@@ -60,6 +60,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Transformfulldata.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -73,9 +77,13 @@ import com.service.FreeTrial12;
 
 public class Transformfulldata extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -96,6 +104,9 @@ public class Transformfulldata extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -375,6 +386,15 @@ public class Transformfulldata extends SlingAllMethodsServlet {
 		}
 	}
 
+	/**
+	 * Gets the keyvalue.
+	 *
+	 * @param trformjson the trformjson
+	 * @param response the response
+	 * @param username the username
+	 * @param project the project
+	 * @return the keyvalue
+	 */
 	public JSONObject getkeyvalue(JSONArray trformjson, SlingHttpServletResponse response, String username,
 			String project) {
 		JSONArray jsonarray = null;
@@ -417,6 +437,17 @@ public class Transformfulldata extends SlingAllMethodsServlet {
 		return jsonObject2;
 	}
 
+	/**
+	 * Gets the keyjson.
+	 *
+	 * @param trformjson the trformjson
+	 * @param responsejson the responsejson
+	 * @param response the response
+	 * @param username the username
+	 * @param project the project
+	 * @return the keyjson
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JSONObject getkeyjson(JSONArray trformjson, JSONObject responsejson, SlingHttpServletResponse response,
 			String username, String project) throws IOException {
 		JSONArray jsonarray = null;

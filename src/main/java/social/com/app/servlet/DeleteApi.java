@@ -53,6 +53,10 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DeleteApi is used to delete project.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -65,14 +69,23 @@ import com.service.FreeTrial12;
 @SuppressWarnings("serial")
 // /portal/servlet/service/Delete.delete
 public class DeleteApi extends SlingAllMethodsServlet {
+
+/** The repo. */
 // Delete.delete
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
 	// @Reference
 	// private SchedulerService product;
-//delete
+/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
+	//delete
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -93,6 +106,9 @@ public class DeleteApi extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();

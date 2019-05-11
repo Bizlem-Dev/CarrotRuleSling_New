@@ -76,6 +76,14 @@ import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OutputManagement_Data used to save uploaded file to sling repository and server. 
+ * Create the JSON of uploaded excel and search data in mongoDb [Method SelectDatabyAgentId].
+ * Collect all transform, raw data from sling of that project.
+ * Also collect setup data from sling.
+ * Generate final output excel.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -89,11 +97,22 @@ import java.text.SimpleDateFormat;
 
 public class CreateOutputmgmtExcel extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The bundle. */
 	ResourceBundle bundle = ResourceBundle.getBundle("config");
+	
+	/** The bundleststic. */
 	static ResourceBundle bundleststic = ResourceBundle.getBundle("config");
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+
+/* (non-Javadoc)
+ * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+ */
 //http://35.236.154.164:8082/portal/servlet/service/FinalOutputmgmt.outputfile
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -110,6 +129,9 @@ public class CreateOutputmgmtExcel extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -797,6 +819,16 @@ public class CreateOutputmgmtExcel extends SlingAllMethodsServlet {
 		
 		
 	}
+	
+	/**
+	 * This method is used to fire rule.
+	 *
+	 * @param urlstr the urlstr
+	 * @param json the json
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws JSONException the JSON exception
+	 */
 	private static String uploadToServer(String urlstr, JSONObject json) throws IOException, JSONException {
 		JSONObject jsonObject = null;
 		StringBuffer response = null;
@@ -838,6 +870,14 @@ public class CreateOutputmgmtExcel extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Search data in mongoDb by agent id and get the data in JSONObject.
+	 *
+	 * @param agentId the agent id
+	 * @param username the username
+	 * @param out the out
+	 * @return the JSON object
+	 */
 	public JSONObject selectDataByAgentId(JSONObject agentId, String username, PrintWriter out) {
 		Mongo mongoClient = null;
 		DB db = null;
@@ -883,6 +923,16 @@ public class CreateOutputmgmtExcel extends SlingAllMethodsServlet {
 	}
 	
 
+	/**
+	 * Apply the formula on transform, rule engine output and generate the final excel with output.
+	 *
+	 * @param exceldata the exceldata
+	 * @param mainobject the mainobject
+	 * @param username the username
+	 * @param project the project
+	 * @param out the out
+	 * @return the string
+	 */
 	public String writeToFile(JSONObject exceldata, JSONObject mainobject,String username,String project,PrintWriter out) {//HSSFWorkbook workbook,
 		HSSFWorkbook workbook = null;
 		HSSFSheet sheet = null;

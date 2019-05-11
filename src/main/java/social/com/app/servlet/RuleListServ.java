@@ -54,6 +54,11 @@ import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
 import com.service.FreeTrial12;
+// TODO: Auto-generated Javadoc
+
+/**
+ * The Class RuleListServ is used to get list of all rule engines from sling repository.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -68,10 +73,19 @@ import com.service.FreeTrial12;
 // http://35.236.154.164:8082/portal/servlet/service/RuleengineList.ruleenginelist
 public class RuleListServ extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
+	
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -90,6 +104,9 @@ PrintWriter out = response.getWriter();
 
     	}
 	
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {

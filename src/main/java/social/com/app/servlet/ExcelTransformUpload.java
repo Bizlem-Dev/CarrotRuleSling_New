@@ -65,6 +65,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ExcelTransformUpload.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -78,15 +82,24 @@ import com.service.FreeTrial12;
 
 public class ExcelTransformUpload extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
 	// @Reference
 	// private SchedulerService product;
 
+	/** The numberofresultsperpage. */
 	final int NUMBEROFRESULTSPERPAGE = 10;
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The bool. */
 	Boolean bool = true;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -94,6 +107,9 @@ public class ExcelTransformUpload extends SlingAllMethodsServlet {
 		out.println("hello");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -317,6 +333,15 @@ public class ExcelTransformUpload extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Gets the keyvalue.
+	 *
+	 * @param datajson the datajson
+	 * @param response the response
+	 * @param username the username
+	 * @param project the project
+	 * @return the keyvalue
+	 */
 	public JSONObject getkeyvalue(JSONArray datajson, SlingHttpServletResponse response, String username,
 			String project) {
 		JSONArray jsonarray = null;
@@ -363,6 +388,16 @@ public class ExcelTransformUpload extends SlingAllMethodsServlet {
 		return jsonObject2;
 	}
 
+	/**
+	 * Gets the keyjson.
+	 *
+	 * @param datajson the datajson
+	 * @param response the response
+	 * @param username the username
+	 * @param project the project
+	 * @return the keyjson
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JSONObject getkeyjson(JSONArray datajson, SlingHttpServletResponse response, String username, String project)
 			throws IOException {
 		JSONArray jsonarray = null;

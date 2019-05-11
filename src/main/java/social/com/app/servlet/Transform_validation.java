@@ -63,6 +63,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Transform_validation is used to extract the formula and save the formula to sling repository applied on excel.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -77,10 +81,16 @@ import com.service.FreeTrial12;
 //          http://35.236.154.164:8082/portal/servlet/service/Transform_validation.form
 public class Transform_validation extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 //
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
@@ -96,6 +106,9 @@ public class Transform_validation extends SlingAllMethodsServlet {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -563,6 +576,12 @@ public class Transform_validation extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Create the JOSNObject of transform data.
+	 * @param trformjson the trformjson
+	 * @param response the response
+	 * @return the keyvalue
+	 */
 	public JSONObject getkeyvalue(JSONArray trformjson, SlingHttpServletResponse response) {
 		JSONArray jsonarray = null;
 		JSONObject json = null;
@@ -606,6 +625,17 @@ public class Transform_validation extends SlingAllMethodsServlet {
 		return jsonObject2;
 	}
 
+	/**
+	 * cretae the JSONObject of transform and raw data
+	 *
+	 * @param trformjson the trformjson
+	 * @param responsejson the responsejson
+	 * @param response the response
+	 * @param username the username
+	 * @param project the project
+	 * @return the keyjson
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JSONObject getkeyjson(JSONArray trformjson, JSONObject responsejson, SlingHttpServletResponse response,
 			String username, String project) throws IOException {
 		PrintWriter out = response.getWriter();
@@ -666,7 +696,18 @@ public class Transform_validation extends SlingAllMethodsServlet {
 		}
 		return jsonObject12;
 	}
-/*  */
+
+	/**
+	 * Create the JSOn of SFDC select data.
+	 *
+	 * @param object the object
+	 * @param session the session
+	 * @param project the project
+	 * @param username the username
+	 * @param response the response
+	 * @return the json alldata
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JSONObject getJsonAlldata(JSONObject object, Session session, String project, String username,
 			SlingHttpServletResponse response) throws IOException {
 		// PrintWriter out = response.getWriter();

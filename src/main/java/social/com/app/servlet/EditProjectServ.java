@@ -19,6 +19,10 @@ import org.apache.sling.jcr.api.SlingRepository;
 import java.io.*;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EditProjectServ is used to edit or update project.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -32,11 +36,19 @@ import com.service.FreeTrial12;
 
 public class EditProjectServ extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();

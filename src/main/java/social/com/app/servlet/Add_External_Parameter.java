@@ -1,35 +1,16 @@
 package social.com.app.servlet;
 
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryResult;
-
-import java.lang.reflect.Array;
 import java.util.*;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import java.net.*;
 
-import jxl.*;
-import jxl.write.*;
-import jxl.write.biff.RowsExceededException;
 import ruleengine.db.ConnectionFactory;
 
-import javax.jcr.LoginException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.PropertyIterator;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
 import javax.jcr.Value;
-import javax.jcr.Workspace;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryResult;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Properties;
 import org.apache.felix.scr.annotations.Property;
@@ -47,23 +28,12 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.request.RequestParameter;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONArray;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
-import org.jsoup.Jsoup;
-import org.osgi.service.http.HttpService;
-
 import com.sun.jersey.core.util.Base64;
-import com.sun.jndi.toolkit.url.UrlUtil;
-
-import javafx.css.SimpleStyleableIntegerProperty;
-
 import java.io.*;
-import java.net.*;
-import java.text.SimpleDateFormat;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -73,6 +43,10 @@ import com.mongodb.util.JSON;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Add_External_Parameter.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -85,13 +59,22 @@ import com.service.FreeTrial12;
 @SuppressWarnings("serial")
 
 public class Add_External_Parameter extends SlingAllMethodsServlet {
+
+/** The repo. */
 //http://35.236.154.164:8082/portal/servlet/service/Add_External_Parameter.External
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
 
 	// @Reference
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	// private SchedulerService product;
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -111,6 +94,9 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -577,6 +563,14 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Retrieve data from excel files saved in sling repository and save data as JSONObject in mongoDb.
+	 *
+	 * @param extNode the Node where file is saved
+	 * @param username the username
+	 * @param out the PrintWriter object
+	 * @return the JSON object
+	 */
 	private JSONObject retrieveDatafromExcel(Node extNode, String username, PrintWriter out) {
 		NodeIterator externalnodeitr = null;
 		Node excelname = null;
@@ -720,6 +714,11 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 		return primarykeydata;
 	}
 
+	/**
+	 * Check fordb collection.
+	 *
+	 * @param username the username
+	 */
 	private void checkFordbCollection(String username) {
 
 		Mongo mongoClient = null;
@@ -736,6 +735,13 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 		}
 
 	}
+
+	/**
+	 * Creates the index of database collection.
+	 *
+	 * @param username the username
+	 */
+	
 // db = mongoClient.getDB("carrotruledb");
 	private void createIndex(String username, PrintWriter out) {
 		Mongo mongoClient = null;
@@ -755,6 +761,13 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 		}
 	}
 
+	/**
+	 * Make database connection with mongoDb.
+	 *
+	 * @param json the json
+	 * @param username the username
+	 * @param out the out
+	 */
 	private void makedbConnection(JSONObject json, String username,PrintWriter out) {
 		Mongo mongoClient = null;
 		DB db = null;
@@ -781,6 +794,17 @@ public class Add_External_Parameter extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Get SFDC selct data from sling and Create the JSONObject with all data.
+	 *
+	 * @param object2 the JSONObject
+	 * @param response the SlingHttpServletResponse
+	 * @param session the session
+	 * @param username the username
+	 * @param project the project name
+	 * @return the JSONObject with all data
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JSONObject getJsonAlldata(JSONObject object2, SlingHttpServletResponse response, Session session,
 			String username, String project) throws IOException {
 		PrintWriter out = response.getWriter();

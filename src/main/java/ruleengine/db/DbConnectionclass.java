@@ -49,6 +49,10 @@ import com.mongodb.DBCursor;
 import com.mongodb.ServerAddress;
 import java.util.Arrays;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DbConnectionclass.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -60,11 +64,17 @@ import java.util.Arrays;
 				"productEdit" }) })
 
 public class DbConnectionclass extends SlingAllMethodsServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -85,6 +95,9 @@ public class DbConnectionclass extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -122,6 +135,11 @@ public class DbConnectionclass extends SlingAllMethodsServlet {
 		
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		checkFordbCollection("mohit");
 		retrieveDatafromExcel("mohit");
@@ -130,6 +148,12 @@ public class DbConnectionclass extends SlingAllMethodsServlet {
 		ConnectionFactory.CONNECTION.closeConnection();
 	}
 
+	/**
+	 * Select data by agent id.
+	 *
+	 * @param agentId the agent id
+	 * @param username the username
+	 */
 	public static void selectDataByAgentId(String agentId,String username){
 		Mongo mongoClient = null;
 		DB db = null;
@@ -154,6 +178,11 @@ public class DbConnectionclass extends SlingAllMethodsServlet {
 		}
 	}
 	
+	/**
+	 * Creates the index.
+	 *
+	 * @param username the username
+	 */
 	public static void createIndex(String username){
 		Mongo mongoClient = null;
 		DB db = null;
@@ -170,6 +199,12 @@ public class DbConnectionclass extends SlingAllMethodsServlet {
 			ConnectionFactory.CONNECTION.closeConnection();
 		}
 	}
+	
+	/**
+	 * Check fordb collection.
+	 *
+	 * @param username the username
+	 */
 	private static void checkFordbCollection(String username){
 
 		Mongo mongoClient = null;
@@ -193,6 +228,12 @@ public class DbConnectionclass extends SlingAllMethodsServlet {
 	
 	}
 	
+	/**
+	 * Makedb connection.
+	 *
+	 * @param json the json
+	 * @param username the username
+	 */
 	private static void makedbConnection(JSONObject json, String username){
 		Mongo mongoClient = null;
 		DB db = null;
@@ -224,6 +265,12 @@ public class DbConnectionclass extends SlingAllMethodsServlet {
 
 	
 	
+	/**
+	 * Retrieve datafrom excel.
+	 *
+	 * @param username the username
+	 * @return the JSON object
+	 */
 	private static JSONObject retrieveDatafromExcel(String username){
 		InputStream externalexcelread = null;
 		String o = null;

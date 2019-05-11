@@ -19,6 +19,10 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SampleTestServlet11.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -30,10 +34,15 @@ import org.apache.sling.jcr.api.SlingRepository;
 	"productEdit" }) })
 @SuppressWarnings("serial")
 public class SampleTestServlet11 extends SlingAllMethodsServlet {
+
+/** The repo. */
 // http://35.236.154.164:8082/portal/servlet/service/SampleTest12
 	@Reference
 	private SlingRepository repo;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();

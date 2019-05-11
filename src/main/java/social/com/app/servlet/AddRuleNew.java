@@ -1,6 +1,5 @@
 package social.com.app.servlet;
 
-
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
@@ -59,6 +58,11 @@ import java.text.SimpleDateFormat;
 
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
+// TODO: Auto-generated Javadoc
+
+/**
+ * The Class AddRule is used to save rule in sling repository and generate new rule.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -73,12 +77,25 @@ import com.service.FreeTrial12;
 // http://35.236.154.164:8082/portal/servlet/service/RuleengineList.ruleenginelist
 public class AddRuleNew extends SlingAllMethodsServlet {
 
+	/** The repos. */
 	@Reference
 	private SlingRepository repos;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
+	
+	/** The bundle. */
 	ResourceBundle bundle = ResourceBundle.getBundle("config");
+	
+	/** The bundleststic. */
 	static ResourceBundle bundleststic = ResourceBundle.getBundle("config");
+	
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -96,6 +113,10 @@ PrintWriter out = response.getWriter();
 		
 
     	}
+
+/* (non-Javadoc)
+ * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+ */
 @Override
 protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 		throws ServletException, IOException {

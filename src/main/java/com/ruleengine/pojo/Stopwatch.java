@@ -1,7 +1,12 @@
 package com.ruleengine.pojo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Stopwatch.
+ */
 public class Stopwatch { 
 
+    /** The start. */
     private long start = 0l;
 
     /**

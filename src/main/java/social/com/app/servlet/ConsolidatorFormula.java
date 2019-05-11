@@ -58,6 +58,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConsolidatorFormula used to save formula in sling repository and apply formula on all output field of rule engine.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -73,13 +77,21 @@ import com.service.FreeTrial12;
 //hello fr.getCarrotruleNode = node /content/services/freetrial/users/carrotrule444_gmail.com/CarrotruleMainNode
 public class ConsolidatorFormula extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
 	// @Reference
 	// private SchedulerService product;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -99,6 +111,9 @@ public class ConsolidatorFormula extends SlingAllMethodsServlet {
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -394,6 +409,17 @@ public class ConsolidatorFormula extends SlingAllMethodsServlet {
 		}
 	}
 
+	/**
+	 * Gets the data.
+	 *
+	 * @param path the path
+	 * @param session the session
+	 * @param username the username
+	 * @param projectname the projectname
+	 * @param carrotnode the carrotnode
+	 * @return the JSON object
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JSONObject GetData(String path, Session session, String username, String projectname, Node carrotnode) throws IOException {
 
 //		Node usernamenode = null;
@@ -458,6 +484,16 @@ public class ConsolidatorFormula extends SlingAllMethodsServlet {
 		return objectvalues;
 	}
 
+	/**
+	 * Getagentdata.
+	 *
+	 * @param session the session
+	 * @param username the username
+	 * @param projectname the projectname
+	 * @param carrotnode the carrotnode
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public String Getagentdata(Session session, String username, String projectname, Node carrotnode) throws IOException {
 //		Node usernamenode = null;
 		Node projectnamenode = null;
@@ -691,6 +727,15 @@ public class ConsolidatorFormula extends SlingAllMethodsServlet {
 		return "Created";
 	}
 
+	/**
+	 * Upload to server.
+	 *
+	 * @param urlstr the urlstr
+	 * @param json the json
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws JSONException the JSON exception
+	 */
 	public static String uploadToServer(String urlstr, JSONArray json) throws IOException, JSONException {
 		StringBuilder response = null;
 		URL url = null;

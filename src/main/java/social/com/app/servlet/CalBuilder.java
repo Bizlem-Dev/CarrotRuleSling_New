@@ -65,6 +65,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CalBuilder used to add formula using output of rule engine.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -78,12 +82,22 @@ import com.service.FreeTrial12;
 
 public class CalBuilder extends SlingAllMethodsServlet {
 
+	/** The repos. */
 	@Reference
 	private SlingRepository repos;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
+	
+	/** The bundle res. */
 	ResourceBundle bundleRes = ResourceBundle.getBundle("config");
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -101,6 +115,9 @@ public class CalBuilder extends SlingAllMethodsServlet {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -554,6 +571,15 @@ public class CalBuilder extends SlingAllMethodsServlet {
 		}
 	}
 
+	/**
+	 * Upload to server.
+	 *
+	 * @param urlstr the urlstr
+	 * @param json the json
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws JSONException the JSON exception
+	 */
 	private static String uploadToServer(String urlstr, JSONObject json) throws IOException, JSONException {
 		JSONObject jsonObject = null;
 		StringBuffer response = null;

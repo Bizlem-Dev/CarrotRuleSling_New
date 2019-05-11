@@ -60,6 +60,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ExcelAxternal.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -73,12 +77,18 @@ import com.service.FreeTrial12;
 
 public class ExcelAxternal extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The session. */
 	Session session = null;
 	// @Reference
 	// private SchedulerService product;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -203,6 +213,9 @@ public class ExcelAxternal extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -501,6 +514,18 @@ public class ExcelAxternal extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Gets the json alldata.
+	 *
+	 * @param object2 the object 2
+	 * @param response the response
+	 * @param session the session
+	 * @param username the username
+	 * @param project the project
+	 * @param primary the primary
+	 * @return the json alldata
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JSONObject getJsonAlldata(JSONObject object2, SlingHttpServletResponse response, Session session,
 			String username, String project, String primary) throws IOException {
 		PrintWriter out = response.getWriter();

@@ -25,9 +25,37 @@ import javax.jcr.version.VersionException;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.commons.json.JSONObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FreeTrial12 is used to check free trial status of current user and get status flag.
+ */
 public class FreeTrial12 {
+	
+	/** The bundle. */
 	ResourceBundle bundle = ResourceBundle.getBundle("config");
+	
+	/** The bundleststic. */
 	static ResourceBundle bundleststic = ResourceBundle.getBundle("config");
+	
+	/**
+	 * Gets the carrotrule node from sling repository using the email and free trial status.
+	 *
+	 * @param freetrialstatus the freetrialstatus
+	 * @param email the email
+	 * @param session1 the session 1
+	 * @param response the response
+	 * @return the carrotrule node
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws AccessDeniedException the access denied exception
+	 * @throws ItemExistsException the item exists exception
+	 * @throws ReferentialIntegrityException the referential integrity exception
+	 * @throws ConstraintViolationException the constraint violation exception
+	 * @throws InvalidItemStateException the invalid item state exception
+	 * @throws VersionException the version exception
+	 * @throws LockException the lock exception
+	 * @throws NoSuchNodeTypeException the no such node type exception
+	 * @throws RepositoryException the repository exception
+	 */
 	public Node getCarrotruleNode(String freetrialstatus, String email, Session session1 ,SlingHttpServletResponse response ) throws IOException, AccessDeniedException, ItemExistsException, ReferentialIntegrityException, ConstraintViolationException, InvalidItemStateException, VersionException, LockException, NoSuchNodeTypeException, RepositoryException {
 
 
@@ -144,6 +172,13 @@ public class FreeTrial12 {
 		session1.save();
 		return CarrotruleMainNode;
 		}
+		
+		/**
+		 * Checkfreetrialstatus of current user and return status flag.
+		 *
+		 * @param userid the userid
+		 * @return the string
+		 */
 		public String checkfreetrial(String userid) {
 		int expireFlag=0;//35.236.154.164 // 35.221.160.146
 		String addr = "http://"+bundleststic.getString("SlingIP")+":8086/apirest/trialmgmt/trialuser/"+userid+"/CarrotRuleFreeTrial";

@@ -65,6 +65,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TransformCreationExcel is used to create the excel depending on selected rule engine on setup page.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -79,11 +83,19 @@ import com.service.FreeTrial12;
 // http://35.236.154.164:8082/portal/servlet/service/TransformFormula1
 public class TransformCreationExcel extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -109,6 +121,9 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -572,6 +587,17 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 		}
 	}
 
+	/**
+	 * Read the external excel and retrieve the raw data.
+	 *
+	 * @param path the path
+	 * @param session the session
+	 * @param username the username
+	 * @param projectname the projectname
+	 * @param carrotnode the carrotnode
+	 * @return the JSON object
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JSONObject GetData(String path, Session session, String username, String projectname, Node carrotnode)
 			throws IOException {
 
@@ -838,6 +864,15 @@ public class TransformCreationExcel extends SlingAllMethodsServlet {
 	 * ex.getMessage()); } return "Created"; }
 	 */
 
+	/**
+	 * Upload to server.
+	 *
+	 * @param urlstr the urlstr
+	 * @param json the json
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws JSONException the JSON exception
+	 */
 	public static String uploadToServer(String urlstr, JSONArray json) throws IOException, JSONException {
 		StringBuilder response = null;
 		URL url = null;

@@ -54,6 +54,10 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CallEsp is used to call ESP of CarrotRule home page.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -69,11 +73,16 @@ import com.service.FreeTrial12;
 // CallEsptj.setUp
 public class CallEsp extends SlingAllMethodsServlet {
 
+	/** The repos. */
 	@Reference
 	private SlingRepository repos;
 
+	/** The session. */
 	Session session = null;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {

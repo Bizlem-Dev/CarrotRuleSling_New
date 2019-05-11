@@ -52,6 +52,10 @@ import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class sampleservlet.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -65,12 +69,16 @@ import java.text.SimpleDateFormat;
 
 public class sampleservlet extends SlingAllMethodsServlet {
 
+	/** The repos. */
 	@Reference
 	private SlingRepository repos;
 
 	// @Reference
 	// private SchedulerService product;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -82,6 +90,9 @@ public class sampleservlet extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();

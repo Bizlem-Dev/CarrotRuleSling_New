@@ -55,6 +55,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Showhomepagedetails get all data from sling repository to display on home page of CarrotRule.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -68,14 +72,20 @@ import com.service.FreeTrial12;
 
 public class Showhomepagedetails extends SlingAllMethodsServlet {
 
+	/** The repos. */
 	@Reference
 	private SlingRepository repos;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
 //  carrotrule.carrotrulefulldetails
 	// @Reference
 	// private SchedulerService product;
 //http://35.236.154.164:8082/portal/servlet/service/carrotrule.carrotrulefulldetails?username=carrotrule444_gmail.com&projectname=Bizlem_project &ruleenginename=Bizlem_rule
-	// http://35.236.154.164:8082/portal/servlet/service/carrotrule.editing?username=carrotrule444_gmail.com
+	/* (non-Javadoc)
+ * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+ */
+// http://35.236.154.164:8082/portal/servlet/service/carrotrule.editing?username=carrotrule444_gmail.com
 	@Override
 	
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
@@ -518,6 +528,9 @@ public class Showhomepagedetails extends SlingAllMethodsServlet {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();

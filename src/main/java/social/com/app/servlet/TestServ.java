@@ -60,6 +60,11 @@ import java.text.SimpleDateFormat;
 
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
+// TODO: Auto-generated Javadoc
+
+/**
+ * The Class TestServ.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -74,12 +79,25 @@ import com.service.FreeTrial12;
 // http://35.200.169.114:8082/portal/servlet/service/testserv
 public class TestServ extends SlingAllMethodsServlet {
 
+	/** The bundle. */
 	@Reference
 	ResourceBundle bundle = ResourceBundle.getBundle("config");
+	
+	/** The bundleststic. */
 	static ResourceBundle bundleststic = ResourceBundle.getBundle("config");
+	
+	/** The repos. */
 	private SlingRepository repos;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
+	
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -106,6 +124,9 @@ PrintWriter out = response.getWriter();
 
     	}
 	
+/* (non-Javadoc)
+ * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+ */
 @Override
 protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 		throws ServletException, IOException {

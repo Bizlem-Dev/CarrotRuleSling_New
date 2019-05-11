@@ -5,11 +5,24 @@ import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 import com.mongodb.MongoURI;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Class ConnectionFactory is used to make connection with mongoDb.
+ */
 public enum ConnectionFactory {
 
+	/** The connection. */
 	CONNECTION;
+    
+    /** The client. */
     private Mongo client = null;
+    
+    /** The mongo client URI. */
     MongoURI mongoClientURI = new MongoURI("mongodb://127.0.0.1:27017");
+    
+    /**
+     * Instantiates a new connection factory.
+     */
     private ConnectionFactory() {
         try {
         	if(client == null){
@@ -24,6 +37,11 @@ public enum ConnectionFactory {
 
 
     
+    /**
+     * Gets the client.
+     *
+     * @return the client
+     */
     public Mongo getClient() {
         if (client == null){
 			try {
@@ -36,6 +54,10 @@ public enum ConnectionFactory {
         }
         return client;
     }
+    
+    /**
+     * Close connection.
+     */
     public void closeConnection(){
     	try {
 			if(null != client){
@@ -48,6 +70,11 @@ public enum ConnectionFactory {
     }
 	
     
+    /**
+     * Close connection.
+     *
+     * @param collectionName the collection name
+     */
     public void closeConnection(DBCollection  collectionName){
     	try {
 			if(null != client){

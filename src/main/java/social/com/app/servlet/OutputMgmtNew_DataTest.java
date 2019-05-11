@@ -81,6 +81,10 @@ import com.ruleengineservlet.CrRuleConstValue;
 //import com.ruleengineservlet.RuleEngineMaster;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OutputMgmtNew_DataTest.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -94,13 +98,23 @@ import com.service.FreeTrial12;
 
 public class OutputMgmtNew_DataTest extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
 	// @Reference
+	/** The opdata. */
 	// private SchedulerService product;
 	OutputMgmtNew_DataTest opdata=new OutputMgmtNew_DataTest();
+	
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -110,6 +124,9 @@ public class OutputMgmtNew_DataTest extends SlingAllMethodsServlet {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -782,6 +799,15 @@ public class OutputMgmtNew_DataTest extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Upload to server.
+	 *
+	 * @param urlstr the urlstr
+	 * @param json the json
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws JSONException the JSON exception
+	 */
 	// Rule Engine Call
 	private static String uploadToServer(String urlstr, JSONObject json) throws IOException, JSONException {
 		JSONObject jsonObject = null;
@@ -824,6 +850,14 @@ public class OutputMgmtNew_DataTest extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Select data by agent id.
+	 *
+	 * @param agentId the agent id
+	 * @param username the username
+	 * @param out the out
+	 * @return the JSON object
+	 */
 	public JSONObject selectDataByAgentId(JSONObject agentId, String username, PrintWriter out) {
 		Mongo mongoClient = null;
 		DB db = null;
@@ -869,6 +903,17 @@ public class OutputMgmtNew_DataTest extends SlingAllMethodsServlet {
 	}
 	
 
+	/**
+	 * Write to file.
+	 *
+	 * @param excelOutputData the excel output data
+	 * @param mainobject the mainobject
+	 * @param username the username
+	 * @param project the project
+	 * @param workbook the workbook
+	 * @param out the out
+	 * @return the string
+	 */
 	public String writeToFile(JSONObject excelOutputData, JSONObject mainobject,String username,String project,HSSFWorkbook workbook,PrintWriter out) {//change for transform
 //		HSSFWorkbook workbook = null;
 		HSSFSheet sheet = null;

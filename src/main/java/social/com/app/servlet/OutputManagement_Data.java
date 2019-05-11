@@ -67,6 +67,10 @@ import java.text.SimpleDateFormat;
 import com.ruleengineservlet.CrRuleConstValue;
 import com.service.FreeTrial12;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OutputManagement_Data.
+ */
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ @Property(name = "service.description", value = "Save product Servlet"),
@@ -80,13 +84,21 @@ import com.service.FreeTrial12;
 
 public class OutputManagement_Data extends SlingAllMethodsServlet {
 
+	/** The repo. */
 	@Reference
 	private SlingRepository repo;
+	
+	/** The fr. */
 	FreeTrial12 fr = new FreeTrial12();
+	
+	/** The session. */
 	Session session = null;
 	// @Reference
 	// private SchedulerService product;
 
+	/* (non-Javadoc)
+	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+	 */
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -95,6 +107,10 @@ public class OutputManagement_Data extends SlingAllMethodsServlet {
 		out.println("hello");
 
 	}
+
+/* (non-Javadoc)
+ * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+ */
 // OutputManagement.outputfile
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -811,6 +827,15 @@ public class OutputManagement_Data extends SlingAllMethodsServlet {
 
 	}
 
+	/**
+	 * Upload to server.
+	 *
+	 * @param urlstr the urlstr
+	 * @param json the json
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws JSONException the JSON exception
+	 */
 	// Rule Engine Call
 	private static String uploadToServer(String urlstr, JSONObject json) throws IOException, JSONException {
 		JSONObject jsonObject = null;
