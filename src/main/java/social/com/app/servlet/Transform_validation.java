@@ -100,6 +100,7 @@ public class Transform_validation extends SlingAllMethodsServlet {
 		try {
 			if (request.getRequestPathInfo().getExtension().equals("Demopage")) {
 				request.getRequestDispatcher("/content/static/.fistpage").forward(request, response);
+				
 			}
 		} catch (Exception e) {
 			out.println(e.getMessage());

@@ -43,6 +43,7 @@ import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.request.RequestParameter;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONArray;
+import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 import org.jsoup.Jsoup;
@@ -74,7 +75,7 @@ import com.service.FreeTrial12;
 				"productEdit" }) })
 @SuppressWarnings("serial")
 
-// http://35.236.154.164:8082/portal/servlet/service/RuleengineList.ruleenginelist
+// http://35.200.169.114:8082/portal/servlet/service/AddRule
 public class AddRuleNew extends SlingAllMethodsServlet {
 
 	/** The repos. */
@@ -122,7 +123,7 @@ protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse 
 		throws ServletException, IOException {
 	PrintWriter out = response.getWriter();
 	Session session = null;
-
+	JSONObject errobj=new JSONObject();
 	try {
 		if (request.getRequestPathInfo().getExtension().equals("postaddRule")) {
 //			 out.println("In post method");
@@ -519,7 +520,8 @@ protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse 
 
 				} catch (Exception e) {
 					// TODO: handle exception
-					e.printStackTrace();
+					errobj.put("RuleGenError",e);
+//					e.printStackTrace();
 				}
 //			String json = uploadToServer(
 //					"http://35.236.213.87:8080/drools/callrules/carrotrule@xyz.com_Test2_Rule2/fire");
@@ -531,7 +533,13 @@ protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse 
 			session.save();
 		}
 	} catch (Exception e) {
-		out.println("Exception : : :" + e.getMessage());
+		try {
+			errobj.put("Error",e);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+//		out.println("Exception : : :" + e.getMessage());
 	}
 	
 }

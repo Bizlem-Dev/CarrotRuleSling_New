@@ -1666,7 +1666,7 @@ $('.addRule-next').click(function() {
 		   							     }
 		   						else{
 
-		   						if(cellVal != ""){
+//		   						if(cellVal != ""){
 		   							
 		   							var getfieldval=firstrow[j];
 		   						
@@ -1765,7 +1765,7 @@ $('.addRule-next').click(function() {
 											    		 }
               
               
-		   						             }
+//		   						             } //cellval is empty close
 		   					     	}		
 		   				}
 
