@@ -444,8 +444,7 @@ $('body').on('click', '.add-more-btn', function() {
 				    console.log("ruleName:choices1 44444444"+choices2);
 //				    console.log("ruleName:choices org333 "+chjson.Rule_Engine);
 				   var newDiv = document.getElementById(Id);
-				   
-				    var selectHTML = "";
+				   var selectHTML = "";
 
 				    selectHTML='<div class="row" ><div class="col-sm-9"><select class="form-control  bg-gray" id="rullist1">';
 				    for(i = 0; i < choices1.length; i = i + 1) {

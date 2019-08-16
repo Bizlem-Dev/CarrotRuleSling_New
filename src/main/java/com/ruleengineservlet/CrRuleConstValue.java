@@ -326,7 +326,7 @@ public static boolean isNullString (String p_text){
 	 UNKNOWN("unknown"),
  	
 	 /** The drl url. */
-	 DRL_URL("http://34.74.125.253:8082/drools/callrules/"),
+	 DRL_URL("http://development.bizlem.io:8087/drools/callrules/"),
  	
 	 /** The portal url. */
 	 PORTAL_URL("http://35.200.169.114:8082/portal/"),
